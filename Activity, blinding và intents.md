@@ -7,6 +7,7 @@
 ### Vòng đời của một Activity
 * 1 Activity sẽ có các trạng thái: `created`, `started`, `resumed`, `paused`, `stopped`, `restarted`, `destroyed`.
 * Một vòng đời của Activity được mô tả dưới sơ đồ như sau:
+
 ![](https://developer.android.com/images/activity_lifecycle.png)
 
 |Method | Mô tả | Trạng thái tiếp theo|
