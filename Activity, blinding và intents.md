@@ -123,7 +123,7 @@ startActivity(intent)
 ### So sánh Implicit Intent và Explicit Intent
 |Implicit Intent|Explicit Intent|
 |---|---|
-|Không đăt tên component cu thể như thằng kia, nhưng khai báo hành động chung để thư hiện để cho phép component từ app khác có thể xử lí. Ví dụ: mở mail. Bluetooth, goi điện thoai từ phím share|Là cái rõ ràng, biết chính xác activity nào có thể xử lí được yêu cầu. Ví dụ: chuyển activity này sang activity kia|
-|Chỉ chỉ đinh hành đông duy nhất đươc hiên và không trưc tiếp chỉ định Android Component|Có thể thưc hiện hành động app cu thể được cod như đổi activity, tải file nền,…|
-|Hành động trên 2 app là khác nhau, ko lien quan => ko có|Có thể truyền data tới activity khác bằng sử dụng method putExtra(), nhận được bằng sử dụng getIntent()|
+|Không đăt tên component cụ thể như Explicit Intent, nhưng khai báo hành động chung để thư hiện để cho phép component từ app khác có thể xử lí. Ví dụ: mở mail, Bluetooth, goi điện thoai từ phím share|Là cái rõ ràng, biết chính xác activity nào có thể xử lí được yêu cầu. Ví dụ: chuyển activity này sang activity kia|
+|Chỉ chỉ đinh hành động duy nhất được hiện và không trực tiếp chỉ định Android Component|Có thể thưc hiện hành động app cụ thể được có như đổi activity, tải file nền,…|
+|Hành động trên 2 app là khác nhau, ko liên quan => ko có|Có thể truyền data tới activity khác bằng sử dụng method putExtra(), nhận được bằng sử dụng getIntent()|
 |2 app giao tiếp với nhau|Dùng để giao tiếp trong app|
