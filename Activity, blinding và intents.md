@@ -22,26 +22,21 @@
 ## 2. Binding
 ### 2.1 FindViewById
 Khi lập trình Android, để tương tác với các View/Control trong giao diện chúng ta thường thông qua thuộc tính Id của các view/control để truy suất thay đổi dữ liệu. Vì Android chia màn hình (Activity) thành hai phần: Phần thiết giao diện, phần xử lý nghiệp vụ. Do đó để truy suất được tới các View trong phần giao diện Android cung cấp hàm findViewById.
-> VD: Trong một constraintlayout, có 2 TextView, TextView đầu có ID là `@+id/ticket_name_tv`, TextView thứ 2 muốn căng chỉnh vị trí theo TextView đầu tiên thì gọi ra Id của nó.
+> VD:
 ```kt
-<TextView
-    android:id="@+id/ticket_name_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="15dp"
-    android:layout_marginTop="20dp"
-    android:paddingBottom="7dp"
-    android:text="Nam Định - Hà Nội"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView>
+        ...
+        android:id='@+id/tênView 
+    </TextView>
+```
+```kt
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
 
-<TextView
-    android:id="@+id/number_plate_tv"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Xe: 29B-0411" />
-    app:layout_constraintStart_toStartOf="@+id/ticket_name_tv"
-    app:layout_constraintTop_toBottomOf="@+id/ticket_name_tv"
+    val tv = findViewById(R.id.tênView)
+
+}
 ```
 ### 2.2 View Binding
 * View Binding là 1 tiện ích cho phép việc liên kết code với View 1 cách dễ dàng hơn, khi View Binding được kích hoạt trong 1 module, nó sẽ tạo ra các binding class đối với mỗi layout.
