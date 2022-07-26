@@ -24,10 +24,10 @@
 Khi lập trình Android, để tương tác với các View/Control trong giao diện chúng ta thường thông qua thuộc tính Id của các view/control để truy suất thay đổi dữ liệu. Vì Android chia màn hình (Activity) thành hai phần: Phần thiết giao diện, phần xử lý nghiệp vụ. Do đó để truy suất được tới các View trong phần giao diện Android cung cấp hàm findViewById.
 > VD:
 ```kt
-    <TextView>
-        ...
-        android:id='@+id/tênView 
-    </TextView>
+<TextView>
+    ...
+    android:id='@+id/tênView 
+</TextView>
 ```
 ```kt
 override fun onCreate(savedInstanceState: Bundle?) {
