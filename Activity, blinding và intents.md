@@ -33,9 +33,7 @@ Khi lập trình Android, để tương tác với các View/Control trong giao 
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
     val tv = findViewById(R.id.tênView)
-
 }
 ```
 ### 2.2 View Binding
