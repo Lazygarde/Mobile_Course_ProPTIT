@@ -4,7 +4,7 @@
 * Một fragment có riêng cho nó layout, có riêng 1 lifecycle cũng như có riêng phần xử lý event từ người dùng.
 * Fragment không thể tồn tại độc lập, nó phải thiết lập dựa trên 1 Activity hoặc là 1 fragment cha.
 * Fragment cho phép chúng ta áp dụng tính mô đun và tính tái sử dụng vào trong UI app bằng cách: Kết hợp của một Global component (component có mặt ở nhiều Activity, ví dụ như: thanh điều hướng, thanh search...) và một diện tích đã cố định có khả năng thay đổi layout dựa trên mục đích sử dụng (ví dụ: có 4 tab: Tab Overview, tab List, tab Manager, tab Setting).
-![](https://images.viblo.asia/full/fd7d3ee0-8433-46f1-9f36-d55afd8885ad.png)
+![](https://www.cdn.geeksforgeeks.org/wp-content/uploads/Fragments_android_1.jpg)
 ## Fragment Lifecycle
 ![](https://i.imgur.com/0EVReuq.png)
 |Method|Mô tả|
@@ -34,7 +34,7 @@
         setFragmentResult(requestKey: String, bundle: Bundle)
         ```
 - Ngược lại ta cũng có thể chuyển dữ liệu từ A sang B bằng cách tương tự
-![](https://images.viblo.asia/fd7d3ee0-8433-46f1-9f36-d55afd8885ad.png)
+![](https://images.viblo.asia/50528bc3-3d29-41a2-ba1f-b9565103ecee.png)
 
 ### Chuyển dữ liệu giữa fragment - activity
 - Lần này chúng ta sẽ áp dụng `setFragmentResultListener` lên trên `FragmentManager` nằm ở Activity.
