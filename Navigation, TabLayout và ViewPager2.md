@@ -30,7 +30,6 @@ dependencies {
     (1): Các Navigation Destination, trong đó có 1 các được đánh dấu là START
     (2): GraphEditor: Minh hoạ các destination và quan hệ giữa chúng (Action)
     (3): Attributes: Hiển thị các thuộc tính của Destination/Action
-
 #### 1.2.3 Thêm NavHost vào Layout của Activity
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -113,7 +112,7 @@ Activity.findNavController(viewId: Int)
 ```
 - SafeArgs: tạm thời bỏ qua, sẽ nhắc đến sau.
 - DeepLinkRequest sử dụng Navigation: cũng tạm thời bỏ qua
-### Navigate bằng ID
+### 1.4 Navigate bằng ID
 ```kt
 viewTransactionsButton.setOnClickListener { view ->
    view.findNavController().navigate(R.id.viewTransactionsAction)
@@ -124,7 +123,7 @@ viewTransactionsButton.setOnClickListener { view ->
 - Default Args: là 1 bundle chứa các các argument default (nếu được cung cấp)
 - `NavOptions`: là một thành phần chứa các cái cài đặt mà chúng ta muốn áp dụng cho `NavAction` này, ví dụ như: 
 `enterAnim`, `exitAnim`: Animation khi chúng ta chúng ta bắt đầu Action và khi kết thúc Action (tương ứng với khi bắt đầu chuyển frag và tới gần khi kết thúc chuyển frag), `popUpToId`...
-### Navigation và Backstack
+### 1.5 Navigation và Backstack
 - Việc chuyển qua chuyển lại giữa các destination, đương nhiên sẽ được quản lý bởi Android thông qua 1 backstack. 
 - Destination đầu tiên được khởi tạo trong `NavHost` sẽ được tự động đặt vào trong stack khi mở app. Các destination sau, cứ mỗi cái được thêm thì sẽ được cho vào đỉnh stack. 
 - Ấn `Back` (nút vật lý/ảo của Android) hay `Up` (nút back của riêng app, nằm ở top-left) sẽ gọi `NavController.navigateUp()` và `NavController.popBackStack()` sẽ pop cái đỉnh của stack ra.
@@ -152,8 +151,9 @@ if (!navController.popBackStack()) {
     ```
     + Với popUpTo chúng ta đã tiến hành xoá B và C, đồng thời còn xoá luôn cả A
     + Nếu ở đây chúng ta không `popUpToInclusive="true"`, sẽ tồn tại tới 2 instance A trong BackStack.
-### Bottom Navigation
+### 1.6 Bottom Navigation
 - Là cái thanh điều hướng giữa các tab khác nhau: ví dụ như của Zalo, của Messenger
+![bot_nav_animation](https://user-images.githubusercontent.com/84316258/182369402-0abcaba6-7190-4cd5-b3f2-44344d43e11e.gif)
 - Bước 1: Thêm dependency (do đang sử dụng MaterialComponent)
 ```groovy
 // build.gradle (app)
@@ -222,3 +222,98 @@ Ngoài ra khi reselect: có `setOnNavigationItemReselectedListener`
     style="@style/Widget.App.BottomNavigationView"
 />
 ```
+## 2. TabLayout
+### 2.1 Định nghĩa
+- Là một UI Component giúp chia một Layout ra làm nhiều Tab. Ví dụ như là Facebook có một số Tab như News Feed, Friends, Noti...
+
+### 2.2 Tại sao sử dụng TabLayout
+- Cho phép ta thêm một Tab programmatically, tức là không cần phải fixed cứng là cái TabLayout này có bao nhiêu Tab Con bên trong
+- Kết hợp với một `ViewPager2`: Một cái container cung cấp animation chuyển Tab rất smooth.
+![TabLayout-in-Android](https://user-images.githubusercontent.com/84316258/182369474-f9cfbd9c-7380-4edd-85a0-49bb52dafa4a.gif)
+### 2.3 Cách sử dụng, kết hợp với ViewPager2
+#### 2.3.1 Cố định số TabItem (Fixed)
+- Bên trong TabLayout có thể bao gồm nhiều TabItem:
+```xml
+<!-- MainActivity.xml -->
+ <com.google.android.material.tabs.TabLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent">
+
+     <com.google.android.material.tabs.TabItem
+             android:text="@string/tab_text"/>
+
+     <com.google.android.material.tabs.TabItem
+             android:icon="@drawable/ic_android"/>
+
+ </com.google.android.material.tabs.TabLayout>
+```
+#### 2.3.2 Không cố định (Non-fixed)
+#### 2.3.3 B1: Thêm TabLayout và ViewPager2 vào file layout
+```xml
+<!-- fragment_play.xml -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
+```
+#### 2.3.4 B2: Viết Adapter quản lý TabLayout này
+```kt
+// PlayFragment.kt
+class PlayFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+        override fun getItemCount(): Int = 2
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> FavoriteFragment()
+                1 -> ...
+                2 -> ...
+                else -> MyMusicFragment()
+            }
+        }
+    }
+```
+#### 2.3.5 B3: Liên kết Adapter với ViewPager, liên kết TabLayout với ViewPager
+```kt
+// PlayFragment.kt
+override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        linkViewPagerWithTabLayout()
+    }
+    private fun linkViewPagerWithTabLayout() {
+        binding.viewPager.adapter = PlayFragmentAdapter(this)
+        // Sử dụng TabLayoutMediator để kết nối 2 thằng với nhau
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Favourite"
+                else -> tab.text = "My Music"
+            }
+        }.attach()
+    }
+}
+```
+### Chú ý:
+- Số lượng TabItem chỉ nên từ 3 - 5 tab
+## 3. ViewPager2
+### 3.1 Định nghĩa:
+- Là một ViewGroup giúp chúng ta kéo qua kéo lại giữa các page. Nó sử dụng một RecycleView.Adapter để xử lý tab hiện lên màn hình.
+![030d43f6-ed6c-4f49-a2f4-abd86f015da1](https://user-images.githubusercontent.com/84316258/182369511-5ce834b2-443b-402c-9876-681974742d6f.gif)
+### 3.2 Tại sao sử dụng ViewPager2
+Điểm mạnh của nó so với phiên bản 1:
+- Hỗ trợ bố cục right to left (RTL)
+- Hỗ trợ bố trí theo chiều dọc (cuộn theo chiều dọc)
+- Sự kiện PageChangeListener tốt hơn
+- Đổi từ `PageAdapter` sang `RecyclerView.Adapter`
+- Đổi từ `FragmentStateFragmentAdapter` sang `FragmentStateAdapter`
+- Đổi từ `registerOnPageChangeCallback` sang `addPageChangeListener`
+### 3.3 Cách sử dụng cùng với TabLayout:
+Xem [Cách sử dụng TabLayout kết hợp với ViewPager2](#cách-sử-dụng-kết-hợp-với-viewpager2)
