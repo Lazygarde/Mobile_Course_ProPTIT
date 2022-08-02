@@ -1,4 +1,4 @@
-# Activity, Blinding và Intents
+# Activity, Binding và Intents
 ## 1.1 Activity
 ### Tổng quan về Activity
 * Activity là một cửa sổ bao quát toàn bộ hoặc một phần màn hình, đây là nơi chúng ta sẽ đặt các UI component lên trên.
