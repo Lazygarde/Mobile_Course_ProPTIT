@@ -140,7 +140,7 @@ if (!navController.popBackStack()) {
     + Sử dụng: `app:popUpTo` để set destination mà ta cần giữ lại, và xoá đi hết tất cả các destination từ nó trở đi. 
     + Nếu muốn xoá triệt để cả cái destination được sd ở `popUpTo`, gán thuộc tính: `app:popUpToInclusive="true"`
     + Ví dụ:
-    ![](/doc-kotlin/res/navigation-getting-started-pop.png)
+    ![navigation-getting-started-pop](https://user-images.githubusercontent.com/84316258/182306183-b6bdf61f-e78c-4a38-b8a9-2f141fdf2bb5.png)
     + Flow: A -> B -> C -> A
     + Tại C chúng ta implement Action như sau: 
     ```xml
