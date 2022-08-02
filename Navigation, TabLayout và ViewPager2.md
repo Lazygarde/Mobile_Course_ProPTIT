@@ -229,6 +229,7 @@ Ngoài ra khi reselect: có `setOnNavigationItemReselectedListener`
 ### 2.2 Tại sao sử dụng TabLayout
 - Cho phép ta thêm một Tab programmatically, tức là không cần phải fixed cứng là cái TabLayout này có bao nhiêu Tab Con bên trong
 - Kết hợp với một `ViewPager2`: Một cái container cung cấp animation chuyển Tab rất smooth.
+
 ![TabLayout-in-Android](https://user-images.githubusercontent.com/84316258/182369474-f9cfbd9c-7380-4edd-85a0-49bb52dafa4a.gif)
 ### 2.3 Cách sử dụng, kết hợp với ViewPager2
 #### 2.3.1 Cố định số TabItem (Fixed)
